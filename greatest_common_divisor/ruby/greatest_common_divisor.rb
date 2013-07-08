@@ -6,7 +6,7 @@
 
 def common_divisor(int1, int2)
   smallest_possible = [int1, int2].min
-  possibilities = 1.upto(smallest_possible).to_a.reverse
+  possibilities = smallest_possible.downto(1).to_a
 
   possibilities.each do |i|
     if int1 % i == 0 && int2 % i == 0
