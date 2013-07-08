@@ -12,3 +12,8 @@ def common_divisor(int1, int2)
     return i if int1 % i == 0 && int2 % i == 0
   end
 end
+
+p "Please enter two space delimited integers to find common divisor"
+ints = gets.chomp.split(' ');
+ints.map! { |i| i.to_i }
+p common_divisor(ints[0], ints[1])
