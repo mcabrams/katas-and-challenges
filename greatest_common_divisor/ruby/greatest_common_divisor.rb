@@ -9,8 +9,6 @@ def common_divisor(int1, int2)
   possibilities = smallest_possible.downto(1).to_a
 
   possibilities.each do |i|
-    if int1 % i == 0 && int2 % i == 0
-      return i
-    end
+    return i if int1 % i == 0 && int2 % i == 0
   end
 end
