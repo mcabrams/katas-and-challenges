@@ -34,3 +34,52 @@
  * 19 7 
  * 5 3 4 6
  */
+
+var assert = function(expected, actual) {
+  if (expected !== actual) {
+    throw "Assertion failed: expected " + expected + ", but got " + actual;
+  }
+};
+
+// var randomNum = function(max) {
+  // var min = 1;
+  // return Math.floor(Math.random() * (max - min + 1)) + min;
+// };
+
+var decryptRolls = function(input) {
+  var arr = input.split('d');
+  var numOfDie = arr[0],
+      sides = arr[1];
+
+  return {
+    numOfDie: numOfDie,
+    sides: sides
+  };
+};
+
+var calcRoll = function(sides) {
+  var min = 1;
+  return Math.floor(Math.random() * (sides - min + 1)) + min;
+};
+
+var rollDie = function(die) {
+  var rolls = decryptRolls(die),
+      output = "";
+  var numOfRolls = rolls.numOfDie,
+      sides = rolls.sides;
+
+  for (i = 0; i < numOfRolls; i++) {
+    output += calcRoll(sides) + " ";
+  }
+  
+  return output;
+};
+
+assert("5", decryptRolls("3d5").sides);
+assert("10", decryptRolls("2d10").sides);
+assert("5", decryptRolls("5d10").numOfDie);
+assert("10", decryptRolls("10d3").numOfDie);
+assert(1, calcRoll(1));
+assert("1", rollDie("1d1"));
+assert("1 1 ", rollDie("2d1"));
+console.log("All tests passed!");
