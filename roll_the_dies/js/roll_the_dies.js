@@ -41,11 +41,6 @@ var assert = function(expected, actual) {
   }
 };
 
-// var randomNum = function(max) {
-  // var min = 1;
-  // return Math.floor(Math.random() * (max - min + 1)) + min;
-// };
-
 var decryptRolls = function(input) {
   var arr = input.split('d');
   var numOfDie = arr[0],
@@ -58,12 +53,15 @@ var decryptRolls = function(input) {
 };
 
 var calcRoll = function(sides) {
-  var min = 1;
-  return Math.floor(Math.random() * (sides - min + 1)) + min;
+  return randomNum(1, sides);
 };
 
-var rollDie = function(die) {
-  var rolls = decryptRolls(die),
+var randomNum = function(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+var rollDie = function(dieString) {
+  var rolls = decryptRolls(dieString),
       output = "";
   var numOfRolls = rolls.numOfDie,
       sides = rolls.sides;
@@ -72,7 +70,7 @@ var rollDie = function(die) {
     output += calcRoll(sides) + " ";
   }
   
-  return output;
+  return output.trimRight();
 };
 
 assert("5", decryptRolls("3d5").sides);
@@ -81,5 +79,7 @@ assert("5", decryptRolls("5d10").numOfDie);
 assert("10", decryptRolls("10d3").numOfDie);
 assert(1, calcRoll(1));
 assert("1", rollDie("1d1"));
-assert("1 1 ", rollDie("2d1"));
+assert("1 1", rollDie("2d1"));
 console.log("All tests passed!");
+
+console.log( rollDie("3d12") );
